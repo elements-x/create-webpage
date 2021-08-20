@@ -15,15 +15,15 @@ async function getPackageInfo(user, repoName) {
     }
   } else { // get it from package.json
     const pjson = require('./package.json');
-    pjson.html_url = pjson.repository?.url;
-    pjson.issue_events_url = pjson.bugs.url;
+    pjson.html_url = (pjson.repository || {}).url;
+    pjson.issue_events_url = (pjson.bugs || {}).url;
     return pjson;
   }
 }
 
 function getAnswers(pkgInfo) {
   const inquirer = require('inquirer');
-  const required = val = Promise.resolve(!!val);
+  const required = val => Promise.resolve(!!val);
 
   const questions = [
     {type: 'input', name: 'name', message: 'Project Name', default: pkgInfo.name, required},
