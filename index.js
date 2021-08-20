@@ -1,135 +1,73 @@
 #!/usr/bin/env node
-
 const path = require('path');
-const mustache = require('mustache');
 const fs = require('fs-extra');
-const inquirer = require('inquirer');
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
+const mustache = require('mustache');
 const fetch = require('node-fetch');
 
-run();
+async function getPackageInfo(user, repoName) {
+  if (user && repoName) { // get it from github api
+    const gitApiUrl = `https://api.github.com/repos/${user}/${repoName}`;
+    const resp = await fetch(gitApiUrl);
+    if (resp.ok) {
+      return resp.json();
+    } else {
+      throw `Error: Invalid git repo, ${gitApiUrl}`;
+    }
+  } else { // get it from package.json
+    const pjson = require('./package.json');
+    pjson.html_url = pjson.repository?.url;
+    pjson.issue_events_url = pjson.bugs.url;
+    return pjson;
+  }
+}
+
+function getAnswers(pkgInfo) {
+  const inquirer = require('inquirer');
+  const required = val = Promise.resolve(!!val);
+
+  const questions = [
+    {type: 'input', name: 'name', message: 'Project Name', default: pkgInfo.name, required},
+    {type: 'input', name: 'outDir', message: 'Output Directory', default: 'docs', required},
+    {type: 'input', name: 'description', message: 'Description', default: pkgInfo.description, required},
+    {type: 'input', name: 'version', message: 'Version', default: pkgInfo.version, required},
+    {type: 'input', name: 'repo_url', message: 'Repo. URL', default: pkgInfo.html_url, required},
+    {type: 'input', name: 'issue_url', message: 'Issue URL', default: pkgInfo.issue_events_url},
+    {type: 'license', name: 'license', message: 'License', default: pkgInfo.license},
+  ];
+
+  return inquirer.prompt(questions);
+}
+
+// deep level file processing with callback actions
+function copyDir(fromDir, toDir, replacements) {
+  const walkDir = function(dir, callback) {
+    fs.readdirSync(dir).forEach( f => {
+      let dirPath = path.join(dir, f);
+      let isDirectory = fs.statSync(dirPath).isDirectory();
+      isDirectory ?  walkDir(dirPath, callback) : callback(path.join(dir, f));
+    });
+  };
+ 
+  walkDir(fromDir, file => {
+    const fileContents = fs.readFileSync(file, 'utf8');
+    let [outputPath, outputContents] = [path.join(toDir, file), fileContents];
+    try {
+      outputContents = mustache.render(fileContents, replacements);
+    } catch (e) {}
+    fs.outputFileSync(outputPath, outputContents);
+  });
+}
 
 async function run() {
-  const gitRepo = await getGitRepo(process.argv[2]);
-  const tmpDir = path.join(process.cwd(), '.tmp');
-  fs.removeSync(tmpDir);
+  const [user, repoName] = (process.argv[2]||'').split('/').slice(-2);
+  const pkgInfo = await getPackageInfo(user, repoName);
+  console.log(`Start generating web page for ${pkgInfo.name}`);
 
-  if (!gitRepo) {
-    res = await fetch(`https://api.github.com/orgs/npm-init/repos`)
-      .then(res => res.json())
-      .then(json => 
-        json.map(repo => repo.name).filter(name => name !== 'create-with')
-      );
-    console.log('Usage, `npm init with ????`');
-    console.log(res.join('\n'));
-    process.exit(1);
-  }
+  const answers = await getAnswers(pkgInfo);
+  console.log(`processing ${answers}}`);
 
-  const gitRepoUrl = `https://github.com/${gitRepo}`;
-  const { stdout, stderr } = await exec(`git clone ${gitRepoUrl} ${tmpDir}`);
-
-  const npmInitFile = path.join(tmpDir, 'npm-init.json');
-  const templateDir = path.join(tmpDir, 'template');
-  try {
-    await npmInitPkg(npmInitFile, templateDir);
-  } catch(e) {
-    console.error(e);
-  } finally {
-    fs.removeSync(tmpDir);
-  }
+  copyDir(path.join(__dirname, 'template'), answers.outDir);
+  console.log(`Done. To open pages \nnpx http-server ${answers.outDir}`);
 }
 
-// check if repo exists and has npm-init.json and template directory
-async function getGitRepo(arg) {
-  let gitRepo;
-
-  if (arg) {
-    const argGitRepo = arg.match(/\//) ? arg : `npm-init/${arg}`;
-    const gitRepoUrl = `https://github.com/${argGitRepo}`;
-    const gitRepoApiUrl = `https://api.github.com/repos/${argGitRepo}`;
-
-    let res1 = await fetch(gitRepoApiUrl);
-    let res2 = await fetch(gitRepoApiUrl + '/contents/npm-init.json');
-    let res3 = await fetch(gitRepoApiUrl + '/contents/template');
-    if (res1.ok && res2.ok && res3.ok) {
-      gitRepo = argGitRepo;
-    } else {
-      console.error('Error: Invalid git repo. In must have npm-init.json and template directory.');
-    }
-  } 
-
-  return gitRepo;
-}
-
-function npmInitPkg(npmInitFile, templateDir) {
-  npmInit = JSON.parse(fs.readFileSync(npmInitFile, 'utf8'));
-
-  const questions = getQuestions(npmInit);
-  return inquirer.prompt(questions).then(answers => {
-      console.log('processing ... ', answers);
-      walkDir(templateDir, filePath => {
-        copyTemplate({templateDir, filePath, answers, npmInit})
-      });
-      return answers;
-    }).then(answers => {
-      console.info(mustache.render(npmInit.completeMessage, answers));
-    }).catch(e => console.error(e) && process.exit(1));
-}
-
-function getQuestions(npmInit) {
-  const defaultPrompts = {
-    projectName: {
-      type: 'string',
-      required: true,
-      default: 'my-awesome-project',
-      message: 'Project Name'
-    }
-  };
-  const prompts = Object.assign({}, defaultPrompts, npmInit.prompts);
-  const questions = [];
-  for (var key in prompts) {
-    let question = prompts[key];
-    question.name = key;
-    if (question.required) {
-      question.validate = val => Promise.resolve(!!val);
-    }
-    if (question.type === 'string') {
-      question.type = 'input';
-      question.filter = val => Promise.resolve(val.toLowerCase().replace(/\s+/g, '-'));   
-    }
-    questions.push(question);
-  }
-  return questions;
-}
-
-/**
- * copy files from template to project directory 
- * params { templateDir, filePath, answers, npmInit }
- */
-function copyTemplate(params) {
-  const cwd = process.cwd();
-  const filePath = params.filePath.replace(params.templateDir,'');
-  const targetDir = path.join(cwd, filePath);
-  const fileContents = fs.readFileSync(params.filePath, 'utf8');
-  const pkgName = params.answers.name || params.answers.projectName;
-
-  const outputPath = path.join(cwd, pkgName, filePath);
-  try {
-    const outputContents = mustache.render(fileContents, params.answers);
-    fs.outputFileSync(outputPath, outputContents);
-  } catch (e) {
-    const outputContents = fileContents;
-    fs.outputFileSync(outputPath, outputContents);
-  }
-}
-
-function walkDir(dir, callback) {
-  fs.readdirSync(dir).forEach( f => {
-    let dirPath = path.join(dir, f);
-    let isDirectory = fs.statSync(dirPath).isDirectory();
-    isDirectory ? 
-      walkDir(dirPath, callback) : callback(path.join(dir, f));
-  });
-};
-
+run();

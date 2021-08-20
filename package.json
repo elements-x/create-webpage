@@ -1,18 +1,13 @@
 {
-  "name": "create-for",
-  "version": "0.8.10",
-  "description": "`npm init for <repo-name>` base code",
+  "name": "genpage",
+  "version": "0.1.0",
+  "description": "VanillarJS Single Page Web Application Template Generator",
   "repository": "https://github.com/allenhwkim/create-for.git",
-  "scripts": {
-  },
-  "engines": {
-    "node": ">=7"
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.com/"
   },
   "bin": {
-    "create-for": "index.js"
+    "genpage": "index.js"
   },
   "files": [
     "index.js"
