@@ -4,7 +4,6 @@
   "description": "`npm init for <repo-name>` base code",
   "repository": "https://github.com/allenhwkim/create-for.git",
   "scripts": {
-    "build": "rimraf dist && webpack"
   },
   "engines": {
     "node": ">=7"
