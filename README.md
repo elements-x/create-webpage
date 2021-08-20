@@ -1,7 +1,7 @@
-# create-with
-Base code for `npm-init with`
+# create-for
+Base code for `npm-init for`
 
-* This repo. is the base code of `npm init with` or `npx create-with`.
+* This repo. is the base code of `npm init for` or `npx create-for`.
 
 ## Usage
 1. You can create your own npm-init template with two files with;
@@ -13,11 +13,12 @@ Base code for `npm-init with`
 `$ git push`
 
 3. Then, you are ready.
-`$ npm init with myusername/my-template`
+`$ npm init for myusername/my-template`
 
-If you want it without your user name, e.g., `npm init with my-template`, 
-it has to be under https://github.com/npm-init. 
-Thus, pleae create an [issue](https://github.com/npm-init/create-with/issues) for it.
+If the temlate repo. is under https://github.com/npm-init, 
+you can run it without your user name, e.g., `npm init for my-template`. 
+
+Thus, pleae create an [issue](https://github.com/npm-init/create-for/issues) for it.
 
 ## Examples of `npm-init.json`
 ```
@@ -51,11 +52,5 @@ e.g. package.json
   "version": "0.0.0",
   "main": "dist/{{name}}.umd.js
 }
-
-## For Developers
-
-```
-$ node index.js allenhwkim/custom-element
-```
 
 MIT Licensed
