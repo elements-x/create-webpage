@@ -1,8 +1,8 @@
 {
-  "name": "create-with",
+  "name": "create-for",
   "version": "0.8.10",
-  "description": "`npm init with <repo-name>` base code",
-  "repository": "allenhwkim/create-with",
+  "description": "`npm init for <repo-name>` base code",
+  "repository": "https://github.com/allenhwkim/create-for.git",
   "scripts": {
     "build": "rimraf dist && webpack"
   },
@@ -10,7 +10,7 @@
     "node": ">=7"
   },
   "bin": {
-    "create-witn": "index.js"
+    "create-for": "index.js"
   },
   "files": [
     "index.js"
