@@ -9,6 +9,9 @@
   "engines": {
     "node": ">=7"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
+  },
   "bin": {
     "create-for": "index.js"
   },
