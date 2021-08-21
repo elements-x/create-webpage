@@ -1,5 +1,5 @@
 # genpage
-VanillarJS Single Page Web Application Template Generator
+Single Page Web Application Template Generator.
 
 Generate an introductory webpage using package.json and README.md
 
