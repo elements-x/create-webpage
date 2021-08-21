@@ -17,9 +17,7 @@
     "http-server": "^13.0.1",
     "inquirer": "^6.0.0",
     "mustache": "^2.3.0",
-    "node-fetch": "^2.1.2"
-  },
-  "devDependencies": {
+    "node-fetch": "^2.1.2",
     "showdown": "^1.9.1"
   }
 }
