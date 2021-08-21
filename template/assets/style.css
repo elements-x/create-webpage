@@ -65,6 +65,7 @@ h3,.h3 { font-size: 1.75rem }
 .navbar .dark-mode-switch { 
   font-size: 16px; color: var(--text-color) !important; border-color: var(--text-color) !important; 
 }
+.navbar .dark-mode-switch b { font-weight: normal; }
 .navbar .links { flex: 1; text-align: right;}
 .navbar .links > * { margin-right: 12px; color: var(--text-color)}
 .navbar .links .version { font-size: 20px;}
