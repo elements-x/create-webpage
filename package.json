@@ -19,5 +19,7 @@
     "mustache": "^2.3.0",
     "node-fetch": "^2.1.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "showdown": "^1.9.1"
+  }
 }
