@@ -7,7 +7,7 @@ Generate a webpage using package.json and README.md
 ```
 $ npm i genpage -D
 $ npx genpage
-$ npx http-server --open ./docs # to see the generated contents
+$ cd docs && npx http-server -o # to see the generated contents
 ```
 
 ## How It Works
