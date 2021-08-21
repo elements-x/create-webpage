@@ -10,7 +10,7 @@
     "genpage": "index.js"
   },
   "files": [
-    "index.js"
+    "index.js", "template"
   ],
   "dependencies": {
     "fs-extra": "^6.0.1",

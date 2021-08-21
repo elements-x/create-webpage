@@ -15,8 +15,8 @@ async function getPackageInfo(user, repoName) {
       throw `Error: Invalid git repo, ${gitApiUrl}`;
     }
   } else { // get it from package.json
-    const pjson = require('./package.json');
-    pjson.html_url = (pjson.repository || {}).url;
+    const pjson = require(path.join(process.cwd(), 'package.json'));
+    pjson.html_url = (pjson.repository || {}).url.replace('.git','');
     return pjson;
   }
 }
@@ -25,10 +25,10 @@ function getAnswers(pkgInfo) {
   const inquirer = require('inquirer');
   const required = val => Promise.resolve(!!val);
   pkgInfo.name = pkgInfo.name || 'unnamed';
-  pkgInfo.description = pkgInfo.name || 'Description';
+  pkgInfo.description = pkgInfo.description || 'Description';
   pkgInfo.html_url = pkgInfo.html_url || `https://github.com/${pkgInfo.name}`;
   pkgInfo.issue_events_url = `${pkgInfo.html_url}/issues`;
-  pkgInfo.license = pkgInfo.license.name || pkgInfo.license || 'MIT';
+  pkgInfo.license = pkgInfo.license || (pkgInfo.license && pkgInfo.license.name) ||  'MIT';
 
   const questions = [
     {type: 'input', name: 'name', message: 'Project Name', default: pkgInfo.name, validate: required},
@@ -79,8 +79,8 @@ async function buildHomeHtml(outDir, user, repoName) {
     const resp = await fetch(url);
     readmeContents = await resp.text();
   } else {
-    console.log(`* Generating ${destPath} from ./README.md`);
-    readmeContents = fs.readFileSync('./README.md', 'utf8');
+    console.log(`* Generating ${destPath} from README.md`);
+    readmeContents = fs.readFileSync(path.join(process.cwd(), 'README.md'), 'utf8');
   }
   const options = {ghCompatibleHeaderId: true, simpleLineBreaks: true, ghMentions: true, tables: true};
   const converter = new showdown.Converter(options)
