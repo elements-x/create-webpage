@@ -1,6 +1,6 @@
 {
   "name": "genpage",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "VanillarJS Single Page Web Application Template Generator",
   "repository": "https://github.com/allenhwkim/create-for.git",
   "publishConfig": {
