@@ -1,7 +1,7 @@
 # genpage
 VanillarJS Single Page Web Application Template Generator
 
-Generate a template webpage automatically using your package.json and README.md 
+Generate a webpage using package.json and README.md 
 
 ## Usage
 ```
