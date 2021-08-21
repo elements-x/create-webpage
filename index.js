@@ -24,15 +24,19 @@ async function getPackageInfo(user, repoName) {
 function getAnswers(pkgInfo) {
   const inquirer = require('inquirer');
   const required = val => Promise.resolve(!!val);
+  pkgInfo.name = pkgInfo.name || 'unnamed';
+  pkgInfo.description = pkgInfo.name || 'Description';
+  pkgInfo.html_url = pkgInfo.html_url || `https://github.com/${pkgInfo.name}`;
+  pkgInfo.issue_events_url = pkgInfo.issue_events_url || `https://github.com/${pkgInfo.name}/issues`;
 
   const questions = [
-    {type: 'input', name: 'name', message: 'Project Name', default: pkgInfo.name, required},
-    {type: 'input', name: 'outDir', message: 'Output Directory', default: 'docs', required},
-    {type: 'input', name: 'description', message: 'Description', default: pkgInfo.description, required},
-    {type: 'input', name: 'version', message: 'Version', default: pkgInfo.version, required},
-    {type: 'input', name: 'repo_url', message: 'Repo. URL', default: pkgInfo.html_url, required},
+    {type: 'input', name: 'name', message: 'Project Name', default: pkgInfo.name, validate: required},
+    {type: 'input', name: 'outDir', message: 'Output Directory', default: 'docs', validate: required},
+    {type: 'input', name: 'description', message: 'Description', default: pkgInfo.description, validate: required},
+    {type: 'input', name: 'version', message: 'Version', default: pkgInfo.version, validate: required},
+    {type: 'input', name: 'repo_url', message: 'Repo. URL', default: pkgInfo.html_url, validate: required},
     {type: 'input', name: 'issue_url', message: 'Issue URL', default: pkgInfo.issue_events_url},
-    {type: 'license', name: 'license', message: 'License', default: pkgInfo.license},
+    {type: 'license', name: 'license', message: 'License', default: pkgInfo.license || 'MIT'},
   ];
 
   return inquirer.prompt(questions);
@@ -41,19 +45,25 @@ function getAnswers(pkgInfo) {
 // deep level file processing with callback actions
 function copyDir(fromDir, toDir, replacements) {
   const walkDir = function(dir, callback) {
-    fs.readdirSync(dir).forEach( f => {
-      let dirPath = path.join(dir, f);
+    fs.readdirSync(dir).forEach( file => {
+      let dirPath = path.join(dir, file);
       let isDirectory = fs.statSync(dirPath).isDirectory();
-      isDirectory ?  walkDir(dirPath, callback) : callback(path.join(dir, f));
+      isDirectory ?  walkDir(dirPath, callback) : callback(path.join(dir, file));
     });
   };
  
+  console.log(`* Copying directory ${fromDir} to ${toDir} with replacements`);
+  console.log('  ', {replacements});
   walkDir(fromDir, file => {
     const fileContents = fs.readFileSync(file, 'utf8');
-    let [outputPath, outputContents] = [path.join(toDir, file), fileContents];
+    const outputPath = path.join(toDir, file.replace(fromDir, ''));
+    let outputContents = fileContents;
+    console.log('  Processing file', file, 'to', outputPath);
     try {
       outputContents = mustache.render(fileContents, replacements);
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
     fs.outputFileSync(outputPath, outputContents);
   });
 }
@@ -61,13 +71,13 @@ function copyDir(fromDir, toDir, replacements) {
 async function run() {
   const [user, repoName] = (process.argv[2]||'').split('/').slice(-2);
   const pkgInfo = await getPackageInfo(user, repoName);
-  console.log(`Start generating web page for ${pkgInfo.name}`);
+  console.log(`* Start generating web page for ${pkgInfo.name}`);
 
   const answers = await getAnswers(pkgInfo);
-  console.log(`processing ${answers}}`);
+  console.log(`* Processing answers ${JSON.stringify(answers, null, '  ')}`);
 
-  copyDir(path.join(__dirname, 'template'), answers.outDir);
-  console.log(`Done. To open pages \nnpx http-server ${answers.outDir}`);
+  copyDir(path.join(__dirname, 'template'), answers.outDir, answers);
+  console.log(`Done. To open pages run "cd ${answers.outDir} && npx http-server -o ${answers.outDir}"`);
 }
 
 run();

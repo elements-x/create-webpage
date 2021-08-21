@@ -4,8 +4,8 @@
     <base href=".">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{description}}</title>
-    <meta name="description" content="{{description}}" />
+    <title>genpage</title>
+    <meta name="description" content="genpage" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="//unpkg.com/elements-x"></script> <!-- this can be removed for webpack import 'elements-x' in index.js -->
@@ -16,7 +16,7 @@
   <body>
     <div class="wrapper">
       <x-sidebar id="sidebar" class="sidebar contents">
-        <h1><a href="/" class="logo">{{name}}</a></h1>
+        <h1><a href="/" class="logo">genpage</a></h1>
         <x-route target="main-contents">
           <ul class="list-unstyled">
             <li class="active"> <a href="/" src="pages/home.html">Home</a> </li>
@@ -38,10 +38,9 @@
             <i class="fas fa-bars"></i>
           </button>
           <div class="links">
-            <a href="{{repo_url}}"><i class="fab fa-github"></i></a>
-            <a class="version" href="{{repo_url}}/releases/tag/{{version}}">V{{version}}</a>
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;genpage"><i class="fab fa-github"></i></a>
+            <a class="version" href="https:&#x2F;&#x2F;github.com&#x2F;genpage/releases/tag/0.1.0">V0.1.0</a>
           </div>
-          <x-input id="dark-mode-switch" class="dark-mode-switch" type="switch" on="Light" off="Dark" color="#222"></x-input>
         </div>
 
         <div id="main-contents" class="contents"></div> 
