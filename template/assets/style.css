@@ -1,3 +1,6 @@
+@import './normalize.css';
+@import './github-markdown.css';
+
 html {
   --text-color: #0a244d;
   --background-color: #FFF;
