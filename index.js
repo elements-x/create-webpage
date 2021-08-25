@@ -4,6 +4,7 @@ const fs = require('fs-extra');
 const mustache = require('mustache');
 const fetch = require('node-fetch');
 const showdown = require('showdown');
+const beautify = require('js-beautify');
 
 async function getPackageInfo(user, repoName) {
   if (user && repoName) { // get it from github api
@@ -16,7 +17,7 @@ async function getPackageInfo(user, repoName) {
     }
   } else { // get it from package.json
     const pjson = require(path.join(process.cwd(), 'package.json'));
-    pjson.html_url = (pjson.repository || {}).url.replace('.git','');
+    pjson.html_url = (pjson.repository || pjson.repository.url || '').replace('.git','');
     return pjson;
   }
 }
@@ -69,37 +70,56 @@ function copyDir(fromDir, toDir, replacements) {
   });
 }
 
-async function buildHomeHtml(outDir, user, repoName) {
-  const destPath = path.join(outDir, 'pages', 'home.html');
+async function getMarkdownHtml(mdPath) {
   let readmeContents;
-  
-  if (user && repoName) {
-    const url = `https://raw.githubusercontent.com/${user}/${repoName}/main/README.md`;
-    console.log(`* Generating ${destPath} from ${url}`);
-    const resp = await fetch(url);
+  if (mdPath.match(/^http/)) {
+    const resp = await fetch(mdPath);
     readmeContents = await resp.text();
   } else {
-    console.log(`* Generating ${destPath} from README.md`);
-    readmeContents = fs.readFileSync(path.join(process.cwd(), 'README.md'), 'utf8');
+    readmeContents = fs.readFileSync(mdPath, 'utf8');
   }
+
   const options = {ghCompatibleHeaderId: true, simpleLineBreaks: true, ghMentions: true, tables: true};
   const converter = new showdown.Converter(options)
   converter.setFlavor('github');
-  const html = converter.makeHtml(readmeContents);
-  fs.outputFileSync(destPath, '<div class="markdown-body">' + html + '</div>'); 
+  const html = '<div class="markdown-body">' + converter.makeHtml(readmeContents) + '</div>';
+
+  return beautify.html(html, {
+    unformatted: ['code', 'pre', 'em', 'strong', 'span'],
+    indent_inner_html: true,
+    indent_char: ' ',
+    indent_size: 2,
+    sep: '\n'
+  });
+}
+
+async function buildHomeHtml(outDir, user, repoName) {
+  const destPath = path.join(outDir, 'pages', 'home.html');
+  const mdPath = user && repoName ? 
+    `https://raw.githubusercontent.com/${user}/${repoName}/main/README.md` : path.join(process.cwd(), 'README.md');
+
+  console.log(`* Generating ${destPath} from ${mdPath}`);
+  const readmeHtml = await getMarkdownHtml(mdPath);;
+  fs.outputFileSync(destPath, '<div class="markdown-body">' + readmeHtml + '</div>'); 
 }
 
 async function run() {
-  const [user, repoName] = (process.argv[2]||'').split('/').slice(-2);
-  const pkgInfo = await getPackageInfo(user, repoName);
-  console.log(`* Start generating web page for ${pkgInfo.name}`);
+  const mdOrRepo = process.argv[2] ||'';
+  if (mdOrRepo.match(/\.md$/)) {
+    const html = await getMarkdownHtml(process.argv[2]);
+    console.log(html);
+  } else {
+    const [user, repoName] = mdOrRepo.split('/').slice(-2);
+    const pkgInfo = await getPackageInfo(user, repoName);
+    console.log(`* Start generating web page for ${pkgInfo.name}`);
 
-  const answers = await getAnswers(pkgInfo);
-  console.log(`* Processing answers ${JSON.stringify(answers, null, '  ')}`);
+    const answers = await getAnswers(pkgInfo);
+    console.log(`* Processing answers ${JSON.stringify(answers, null, '  ')}`);
 
-  copyDir(path.join(__dirname, 'template'), answers.outDir, answers);
-  await buildHomeHtml(answers.outDir, user, repoName);
-  console.log(`Done. To open pages run "cd ${answers.outDir} && npx http-server -o"`);
+    copyDir(path.join(__dirname, 'template'), answers.outDir, answers);
+    await buildHomeHtml(answers.outDir, user, repoName);
+    console.log(`Done. To open pages run "cd ${answers.outDir} && npx http-server -o"`);
+  }
 }
 
 run();

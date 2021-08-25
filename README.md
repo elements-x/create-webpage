@@ -8,9 +8,13 @@ Generate an introductory webpage using package.json and README.md
 $ npm i genpage -D
 $ npx genpage
 $ cd docs && npx http-server -o # to see the generated contents
+
+# Only to generate html from .md file
+$ npx genpage README.md 
+$ npx genpage README.md > docs/pages/home.html # to update home.html
 ```
 
-Generated webpage is working as a SPA; Single Page Application. 
+Generated webpage is fully working as a SPA; Single Page Application. 
 You can use it as your github page without any settings or modifiation.
 
 To set your github page with your generated `docs` directory,
