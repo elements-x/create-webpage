@@ -1,0 +1,42 @@
+<div class="markdown-body"><div class="markdown-body">
+  <h1 id="genpage">genpage</h1>
+  <p>Single Page Web Application Template Generator.</p>
+  <p>Generate an introductory webpage using package.json and README.md</p>
+  <h2 id="example">Example</h2>
+  <p><a href="https://elements-x.github.io/touch-x/">https://elements-x.github.io/touch-x/</a><br />
+    <a href="https://elements-x.github.io/genpage/">https://elements-x.github.io/genpage/</a>
+  </p>
+  <h2 id="usage">Usage</h2>
+  <pre><code>$ npm i genpage -D
+$ npx genpage
+* Start generating web page for genpage
+? Project Name genpage
+? Output Directory docs
+? Description VanillarJS Single Page Web Application Template Generator
+? Version 0.2.0
+? Repo. URL https://github.com/elements-x/genpage
+? Issue URL https://github.com/elements-x/genpage/issues
+? License MIT
+... processing message ...</code></pre>
+  <p>To see the generated page</p>
+  <pre><code>$ cd docs &amp;&amp; npx http-server -o</code></pre>
+  <p>You can also generate a single file for any markdown file.</p>
+  <pre><code>$ npx genpage README.md 
+$ npx genpage README.md &gt; docs/pages/home.html # to update home.html</code></pre>
+  <h2 id="to-set-it-as-github-pages">To set it as Github pages</h2>
+  <p>Generated webpage is fully working as a SPA; Single Page Application. <br />
+    You can use it as your github page without any settings or modifiation.</p>
+  <p>To set your github page with your generated <code>docs</code> directory,</p>
+  <ol>
+    <li>Goto settings -&gt; pages</li>
+    <li>Select main branch, and set directory as '/docs', then `Save'.<br />
+      <img src="https://user-images.githubusercontent.com/1437734/130330192-81adb6f3-4082-471c-ab69-80c8145592f2.png" alt="image" />
+    </li>
+  </ol>
+  <h2 id="how-it-works">How It Works</h2>
+  <ol>
+    <li>Read your package.json and README.md</li>
+    <li>Get output directory from user</li>
+    <li>Generate a static web app into the output directory(default <code>docs</code>)</li>
+  </ol>
+</div></div>

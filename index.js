@@ -38,6 +38,7 @@ function getAnswers(pkgInfo) {
     {type: 'input', name: 'version', message: 'Version', default: pkgInfo.version, validate: required},
     {type: 'input', name: 'repo_url', message: 'Repo. URL', default: pkgInfo.html_url, validate: required},
     {type: 'input', name: 'issue_url', message: 'Issue URL', default: pkgInfo.issue_events_url},
+    {type: 'input', name: 'base_path', message: 'Base Path', default: '/'},
     {type: 'license', name: 'license', message: 'License', default: pkgInfo.license},
   ];
 
@@ -55,6 +56,7 @@ function copyDir(fromDir, toDir, replacements) {
   };
  
   console.log(`* Copying directory ${fromDir} to ${toDir} with replacements`);
+  replacements.pathSegmentsToKeep = replacements.base_path.match(/[^\/]+/g) || 0;
   console.log('  ', {replacements});
   walkDir(fromDir, file => {
     const fileContents = fs.readFileSync(file, 'utf8');
