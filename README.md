@@ -3,10 +3,20 @@ Single Page Web Application Template Generator.
 
 Generate an introductory webpage using package.json and README.md
 
+## Example
+https://elements-x.github.io/touch-x/f
+
 ## Usage
 ```
 $ npm i genpage -D
 $ npx genpage
+..
+..
+..
+..
+..
+..
+..
 $ cd docs && npx http-server -o # to see the generated contents
 
 # Only to generate html from .md file
@@ -27,5 +37,5 @@ To set your github page with your generated `docs` directory,
 ## How It Works
 1. Read your package.json and README.md
 2. Get output directory from user
-3. Generate a static web app into the directory
+3. Generate a static web app into the output directory(default `docs`)
 
