@@ -2,7 +2,7 @@
   "name": "genpage",
   "version": "0.2.0",
   "description": "VanillarJS Single Page Web Application Template Generator",
-  "repository": "https://github.com/allenhwkim/create-for.git",
+  "repository": "https://github.com/elements-x/genpage",
   "publishConfig": {
     "registry": "https://registry.npmjs.com/"
   },
