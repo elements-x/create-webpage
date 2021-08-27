@@ -40,7 +40,6 @@ window.addEventListener('DOMContentLoaded', function() {
 
   // Hide sidebar for a smaller screen
   if(window.innerWidth < 600) {
-    $('#sidebar').classList.add('hidden');
     document.body.addEventListener('x-route', _ =>  $('#sidebar').classList.add('hidden')); 
   }
 
