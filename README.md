@@ -4,8 +4,8 @@ Single Page Web Application Template Generator.
 Generate an introductory webpage using package.json and README.md
 
 ## Example
-https://elements-x.github.io/touch-x/
-https://elements-x.github.io/genpage/
+  * https://elements-x.github.io/touch-x/
+  * https://elements-x.github.io/genpage/
 
 ## Usage
 ```
