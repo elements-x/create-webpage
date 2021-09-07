@@ -6,7 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: './docs/index.js'
+    main: './{{out_dir}}/index.js'
   },
   output: {
     path: path.resolve(__dirname, '..', 'docs'),
@@ -34,13 +34,13 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({template: 'docs/index.html', chunks: ['main'], filename: 'index.html' }),
+    new HtmlWebpackPlugin({template: '{{out_dir}}/index.html', chunks: ['main'], filename: 'index.html' }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: './docs/assets', to: 'assets' },
-        { from: './docs/pages', to: 'pages' },
-        { from: './docs/!(index).html', to: '[name][ext]' },
-        { from: './docs/*.txt', to: '[name][ext]' }
+        { from: './{{out_dir}}/assets', to: 'assets' },
+        { from: './{{out_dir}}/pages', to: 'pages' },
+        { from: './{{out_dir}}/!(index).html', to: '[name][ext]' },
+        { from: './{{out_dir}}/*.txt', to: '[name][ext]' }
       ]
     })
   ],

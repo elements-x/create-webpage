@@ -33,11 +33,12 @@ function getAnswers(pkgInfo) {
 
   const questions = [
     {type: 'input', name: 'name', message: 'Project Name', default: pkgInfo.name, validate: required},
-    {type: 'input', name: 'outDir', message: 'Output Directory', default: 'docs', validate: required},
+    {type: 'input', name: 'out_dir', message: 'Output Directory', default: 'docs', validate: required},
     {type: 'input', name: 'description', message: 'Description', default: pkgInfo.description, validate: required},
     {type: 'input', name: 'version', message: 'Version', default: pkgInfo.version, validate: required},
     {type: 'input', name: 'repo_url', message: 'Repo. URL', default: pkgInfo.html_url, validate: required},
     {type: 'input', name: 'issue_url', message: 'Issue URL', default: pkgInfo.issue_events_url},
+    {type: 'input', name: 'template', message: 'Template', default: 'sidebar'},
     {type: 'input', name: 'base_path', message: 'Base Path', default: '/'},
     {type: 'license', name: 'license', message: 'License', default: pkgInfo.license},
   ];
@@ -56,7 +57,6 @@ function copyDir(fromDir, toDir, replacements) {
   };
  
   console.log(`* Copying directory ${fromDir} to ${toDir} with replacements`);
-  replacements.pathSegmentsToKeep = replacements.base_path.match(/[^\/]+/g) || 0;
   console.log('  ', {replacements});
   walkDir(fromDir, file => {
     const fileContents = fs.readFileSync(file, 'utf8');
@@ -84,7 +84,7 @@ async function getMarkdownHtml(mdPath) {
   const options = {ghCompatibleHeaderId: true, simpleLineBreaks: true, ghMentions: true, tables: true};
   const converter = new showdown.Converter(options)
   converter.setFlavor('github');
-  const html = '<div class="markdown-body">' + converter.makeHtml(readmeContents) + '</div>';
+  const html = '<div class="markdown-body animate-x">' + converter.makeHtml(readmeContents) + '</div>';
 
   return beautify.html(html, {
     unformatted: ['code', 'pre', 'em', 'strong', 'span'],
@@ -95,14 +95,14 @@ async function getMarkdownHtml(mdPath) {
   });
 }
 
-async function buildHomeHtml(outDir, user, repoName) {
-  const destPath = path.join(outDir, 'pages', 'home.html');
+async function buildHomeHtml(directory, user, repoName) {
+  const destPath = path.join(directory, 'pages', 'home.html');
   const mdPath = user && repoName ? 
     `https://raw.githubusercontent.com/${user}/${repoName}/main/README.md` : path.join(process.cwd(), 'README.md');
 
   console.log(`* Generating ${destPath} from ${mdPath}`);
   const readmeHtml = await getMarkdownHtml(mdPath);;
-  fs.outputFileSync(destPath, '<div class="markdown-body">' + readmeHtml + '</div>'); 
+  fs.outputFileSync(destPath,  readmeHtml ); 
 }
 
 async function run() {
@@ -118,9 +118,10 @@ async function run() {
     const answers = await getAnswers(pkgInfo);
     console.log(`* Processing answers ${JSON.stringify(answers, null, '  ')}`);
 
-    copyDir(path.join(__dirname, 'template'), answers.outDir, answers);
-    await buildHomeHtml(answers.outDir, user, repoName);
-    console.log(`Done. To open pages run "cd ${answers.outDir} && npx http-server -o"`);
+    fs.rmdirSync(answers.out_dir, { recursive: true, force: true });
+    copyDir(path.join(__dirname, 'template', answers.template), answers.out_dir, answers);
+    await buildHomeHtml(answers.out_dir, user, repoName);
+    console.log(`Done. To open pages run "cd ${answers.out_dir} && npx http-server -o"`);
   }
 }
 

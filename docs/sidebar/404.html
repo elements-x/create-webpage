@@ -22,7 +22,10 @@
       // https://username.github.io/repo-name/one/two?a=b&c=d#qwe becomes
       // https://username.github.io/repo-name/?/one/two&a=b~and~c=d#qwe
       // Otherwise, leave pathSegmentsToKeep as 0.
-      var pathSegmentsToKeep = {{pathSegmentsToKeep}};
+      var pathSegmentsToKeep = 0;
+      if (window.location.pathname.match('/sidebar')) {
+        pathSegmentsToKeep = window.location.pathname.split('/').map(el => '/'+el).indexOf('/sidebar')
+      }
 
       var l = window.location;
       l.replace(

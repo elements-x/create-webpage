@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <base href=".">
+    <base href="{{{base_path}}}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>VanillarJS Single Page Web Application Template Generator</title>
-    <meta name="description" content="VanillarJS Single Page Web Application Template Generator" />
+    <title>{{description}}</title>
+    <meta name="description" content="{{description}}" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="//unpkg.com/elements-x"></script> <!-- this can be removed for webpack import 'elements-x' in index.js -->
 
-    <link rel="stylesheet" href="assets/style.css" />
-    <script src="assets/script.js"></script>
+    <link rel="stylesheet" href="{{{base_path}}}/assets/style.css" />
+    <script src="{{{base_path}}}/assets/script.js"></script>
   </head>
   <body>
     <div class="wrapper">
       <div id="sidebar" class="sidebar contents">
-        <h1><a href="/" class="logo">genpage</a></h1>
+        <h1><a href="{{base_path}}/" class="logo">{{name}}</a></h1>
         <x-route target="main-contents">
           <ul class="list-unstyled">
-            <li class="active"> <a href="/" src="pages/home.html">Home</a> </li>
+            <div href="{{base_path}}" src="pages/home.html"></div>
+            <li class="active"> <a href="home" src="pages/home.html">Home</a> </li>
             <li> <a href="about" src="pages/about.html"> About</a> </li>
             <li> <a href="contact" src="pages/contact.html">Contact</a> </li>
           </ul>
@@ -39,9 +40,9 @@
             <i class="fas fa-bars"></i>
           </button>
           <div class="links">
-            <a href="https:&#x2F;&#x2F;github.com&#x2F;elements-x&#x2F;genpage"><i class="fab fa-github"></i></a>
-            <a href="https:&#x2F;&#x2F;github.com&#x2F;elements-x&#x2F;genpage&#x2F;issues"><i class="fas fa-comments"></i></a>
-            <a href="https:&#x2F;&#x2F;github.com&#x2F;elements-x&#x2F;genpage""><i class="fas fa-star"></i></i></a>
+            <a href="{{{repo_url}}}"><i class="fab fa-github"></i></a>
+            <a href="{{{issue_url}}}"><i class="fas fa-comments"></i></a>
+            <a href="{{{repo_url}}}"><i class="fas fa-star"></i></i></a>
           </div>
           <x-input id="dark-mode-switch" class="dark-mode-switch" type="switch" on="Light" off="Dark" color="#222"></x-input>
         </div>

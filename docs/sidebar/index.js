@@ -5,11 +5,11 @@
  * 
  *   $ npm install -D @babel/core babel-loader clean-webpack-plugin copy-webpack-plugin \
  *     html-webpack-plugin http-server webpack webpack-cli webpack-dev-server
- *   $ webpack --config docs/webpack.config.js
+ *   $ webpack --config docs/sidebar/webpack.config.js
  * 
  * To run webpack-dev-server with webpack
  * 
- *   $ webpack serve --config docs/webpack.config.js --mode=development --open
+ *   $ webpack serve --config docs/sidebar/webpack.config.js --mode=development --open
  * 
  */
 import 'elements-x';
