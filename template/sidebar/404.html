@@ -24,7 +24,7 @@
       // Otherwise, leave pathSegmentsToKeep as 0.
       var pathSegmentsToKeep = 0;
       if (window.location.pathname.match('{{{base_path}}}')) {
-        pathSegmentsToKeep = window.location.pathname.split('/').map(el => '/'+el).indexOf('{{{base_path}}}')
+        pathSegmentsToKeep = ('{{{base_path}}}'.match(/[^\/]+/g) || []).length;
       }
 
       var l = window.location;

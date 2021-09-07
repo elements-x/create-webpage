@@ -116,6 +116,7 @@ async function run() {
     console.log(`* Start generating web page for ${pkgInfo.name}`);
 
     const answers = await getAnswers(pkgInfo);
+    !answers.base_path.endsWith('/') && (answers.base_path += '/');
     console.log(`* Processing answers ${JSON.stringify(answers, null, '  ')}`);
 
     fs.rmdirSync(answers.out_dir, { recursive: true, force: true });

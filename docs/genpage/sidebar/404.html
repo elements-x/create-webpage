@@ -24,7 +24,7 @@
       // Otherwise, leave pathSegmentsToKeep as 0.
       var pathSegmentsToKeep = 0;
       if (window.location.pathname.match('/genpage/sidebar/')) {
-        pathSegmentsToKeep = ('/genpage/sidebar/'.match(/[^\/]+/g) || []).length;
+        pathSegmentsToKeep = window.location.pathname.split('/').map(el => '/'+el).indexOf('/genpage/sidebar/')
       }
 
       var l = window.location;

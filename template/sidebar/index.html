@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="//unpkg.com/elements-x"></script> <!-- this can be removed for webpack import 'elements-x' in index.js -->
 
-    <link rel="stylesheet" href="{{{base_path}}}/assets/style.css" />
-    <script src="{{{base_path}}}/assets/script.js"></script>
+    <link rel="stylesheet" href="assets/style.css" />
+    <script src="assets/script.js"></script>
   </head>
   <body>
     <div class="wrapper">
       <div id="sidebar" class="sidebar contents">
-        <h1><a href="{{base_path}}/" class="logo">{{name}}</a></h1>
+        <h1><a href="{{base_path}}" class="logo">{{name}}</a></h1>
         <x-route target="main-contents">
           <ul class="list-unstyled">
             <div href="{{base_path}}" src="pages/home.html"></div>
