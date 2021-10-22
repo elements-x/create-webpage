@@ -13,12 +13,10 @@ function copyDirAndReplace(fromDir, toDir, replacements = {}) {
   };
  
   console.log(`* Copying directory ${fromDir} to ${toDir} with replacements`);
-  console.log('  ', {replacements});
   walkDir(fromDir, file => {
     const fileContents = fs.readFileSync(file, 'utf8');
     const outputPath = path.join(toDir, file.replace(fromDir, ''));
     let outputContents = fileContents;
-    console.log('  Processing file', file, 'to', outputPath);
     try {
       outputContents = mustache.render(fileContents, replacements);
     } catch (e) {

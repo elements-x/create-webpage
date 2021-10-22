@@ -28,9 +28,7 @@ if ((commands[0] || '').match(/\.md$/)) { // markdown file to html
 //  3. test witth remote package.json
 async function run() {
   const [user, repoName] = commands;
-  const pkgInfo = user && repoName ? 
-    await remotePackageInfo(user, repoName) : 
-    localPackageInfo() || {};
+  const pkgInfo = user && repoName ?  await remotePackageInfo(user, repoName) : localPackageInfo() || {};
 
   // show questions and get answers from user
   const answers = await inquirerQuestions(pkgInfo);
@@ -45,7 +43,7 @@ async function run() {
   const readmePath = user && repoName ?
     `https://raw.githubusercontent.com/${user}/${repoName}/main/README.md` : 
     path.join(process.cwd(), 'README.md');
-  const readmeHtmlPath = path.join(directory, 'pages', 'readme.html');
+  const readmeHtmlPath = path.join(answers.out_dir, 'pages', 'readme.html');
   const readmeHtml = await getHTMLFromMarkdown(readmePath);;
   fs.outputFileSync(readmeHtmlPath,  readmeHtml ); 
 
