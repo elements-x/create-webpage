@@ -1,0 +1,37 @@
+@import './assets/normalize.css';
+@import './assets/github-markdown.css';
+@import './assets/fontawesome/css/all.min.css';
+@import './assets/nav-bar.css';
+
+* {box-sizing: border-box;}
+body {
+  font-family: Lato, --apple-system, sans-serif;
+  transition: background-color 2s;
+}
+body:not(.a11y-outline) :focus {
+  outline: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+body.dark-bg {
+  color: #FFF;
+}
+
+body.dark-bg .nav-bar > *:after {
+  border: 1px solid #FFF;
+}
+body.dark-bg .nav-bar > .nav-item.active:after {
+  background: #FFF;
+}
+
+.contents {
+  min-height: 200vh;
+  text-align: center;
+  /* display: flex; align-items:center; justify-content: center; */
+}
+.contents:after { /* spacer between pages for smooth color transition */
+  content: '';
+  display: block;
+  height: 100vh;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>VanillarJS Single Page Web Application Template Generator</title>
+    <meta name="description" content="VanillarJS Single Page Web Application Template Generator" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- Following should be removed for webpack users. For webpack, see webpack main entry, index.js -->
+    <script src="assets/elements-x.js"></script> <!-- custom elements, enables <x-include> -->
+    <script src="assets/chroma.min.js"></script> <!-- window.chroma-->
+    <script src="assets/animate-x.js"></script> <!-- window.animate -->
+    <!-- Global css and  -->
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" async></script>
+  </head>
+  <body>
+    <nav class="nav-bar vertical">
+      <div class="nav-item active" data-nav="intro">
+        <div class="text">Intro</div>
+      </div>
+      <div class="nav-item" data-nav="home">
+        <div class="text">Home</div>
+      </div>
+      <div class="nav-item"  data-nav="contact"> 
+        <div class="text">Contact</div>
+      </div>
+      <div class="nav-item"  data-nav="about">
+        <div class="text">About</div>
+      </div>
+      <div class="nav-item"  data-nav="more">
+        <div class="text">More</div>
+      </div>
+    </nav>
+
+    <div id="intro" class="contents" data-color="#6f3d3c">
+      <x-include src="pages/intro.html"></x-include>
+    </div>
+
+    <div id="home" class="contents" data-color="#F2FFE4">
+      <x-include src="pages/readme.html"></x-include>
+    </div>
+
+    <div id="contact" class="contents" data-color="#6F3D3C">
+      <x-include src="pages/contact.html"></x-include>
+    </div>
+
+    <div id="about" class="contents" data-color="#FEACC9">
+      <x-include src="pages/about.html"></x-include>
+    </div>
+
+    <div id="more" class="contents" data-color="#9E7E7E">
+      <x-include src="pages/more.html"></x-include>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+:root {
+  --animation-duration: 300ms;
+  --animation-timing-function: ease-in-out;
+}
+  /* transition: opacity 2s, transform 2s, max-height 2s; */
+
+.x-expand-down.x-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  max-height: 0px;
+}
+.x-expand-down {
+  overflow: hidden;
+  transform-origin: center top;
+  transition-property: opacity, tansform, max-height;
+  transition-duration: var(--animation-duration);
+  transition-timing-function: var(--animation-timing-function);
+  transform: translateY(0px);
+  opacity: 1;
+  max-height: 1000px;
+  border: 1px solid #ccc;
+}
+.x-expand-right.x-hidden {
+  transform: translateX(-100%);
+  opacity: 0;
+  max-width: 0px;
+}
+.x-expand-right {
+  overflow: hidden;
+  white-space: nowrap;
+  transform-origin: center left;
+  transition-property: opacity, tansform, max-width;
+  transition-duration: var(--animation-duration);
+  transition-timing-function: var(--animation-timing-function);
+  transform: translateX(0px);
+  opacity: 1;
+  max-width: 1000px;
+}
+
+.x-animate {
+  animation-duration: var(--animation-duration);
+  animation-fill-mode: both;
+  animation-timing-function: var(--animation-timing-function);
+}
+
+@keyframes xFadeIn {
+  from {opacity: 0;} to {opacity: 1;}
+}
+.x-fade-in { animation: var(--animation-duration) var(--animation-timing-function) both xFadeIn;}
+
+@keyframes xFadeOut {
+  from {opacity: 1;} to { opacity: 0;}
+}
+.x-fade-out { animation: var(--animation-duration) var(--animation-timing-function) both xFadeOut; }
+
+@keyframes xRotateIn {
+  from { transform: rotate(180deg); opacity: 0; }
+  to { transform: rotate(0deg); opacity: 1; }
+}
+.x-rotate-in { animation: var(--animation-duration) var(--animation-timing-function) both xRotateIn; transform-origin: center; }
+
+@keyframes XRotateOut {
+  from { opacity: 1; }
+  to { transform: rotate(180deg); opacity: 0; }
+}
+.x-rotate-out { animation: var(--animation-duration) var(--animation-timing-function) both XRotateOut; transform-origin: center; }
+
+@keyframes xZoomIn {
+  from { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+  50% { opacity: 1; }
+}
+.x-zoom-in { animation: var(--animation-duration) var(--animation-timing-function) both xZoomIn; }
+
+@keyframes xZoomOut {
+  from { opacity: 1; }
+  50% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+}
+.x-zoom-out { animation: var(--animation-duration) var(--animation-timing-function) both xZoomOut; }
+
+@keyframes xSlideInDown {
+  from { transform: translate3d(0, -100%, 0); opacity: 0; }
+  to { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+.x-slide-in-down { animation: var(--animation-duration) var(--animation-timing-function) both xSlideInDown;}
+
+@keyframes xSlideInUp {
+  from { transform: translate3d(0, 100%, 0);  opacity: 0;  }
+  to { transform: translate3d(0, 0, 0);  opacity: 1; }
+}
+.x-slide-in-up { animation: var(--animation-duration) var(--animation-timing-function) both xSlideInUp;}
+
+@keyframes xSlideInLeft {
+  from { transform: translate3d(-100%, 0, 0);  opacity: 0;  }
+  to { transform: translate3d(0, 0, 0); opacity: 1;  }
+}
+.x-slide-in-left { animation: var(--animation-duration) var(--animation-timing-function) both xSlideInLeft;}
+
+@keyframes xSlideInRight {
+  from { transform: translate3d(100%, 0, 0);  opacity: 0;  }
+  to { transform: translate3d(0, 0, 0); opacity: 1;  }
+}
+.x-slide-in-right { animation: var(--animation-duration) var(--animation-timing-function) both xSlideInRight;}
+
+@keyframes xSlideInDown {
+  from { transform: translate3d(0, -100%, 0); opacity: 0; }
+  to { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+.x-slide-in-down { animation: var(--animation-duration) var(--animation-timing-function) both xSlideInDown;}
+
+@keyframes xSlideInUp {
+  from { transform: translate3d(0, 100%, 0);  opacity: 0;  }
+  to { transform: translate3d(0, 0, 0);  opacity: 1; }
+}
+.x-slide-in-up { animation: var(--animation-duration) var(--animation-timing-function) both xSlideInUp;}
+
+@keyframes xSlideInLeft {
+  from { transform: translate3d(-100%, 0, 0);  opacity: 0;  }
+  to { transform: translate3d(0, 0, 0); opacity: 1;  }
+}
+.x-slide-in-left { animation: var(--animation-duration) var(--animation-timing-function) both xSlideInLeft;}
+
+@keyframes sSlideInRight {
+  from { transform: translate3d(100%, 0, 0);  opacity: 0;  }
+  to { transform: translate3d(0, 0, 0); opacity: 1;  }
+}
+.x-slide-in-right { animation: var(--animation-duration) var(--animation-timing-function) both sSlideInRight;}
+
+@keyframes xSlideOutDown {
+  from { transform: translate3d(0, 0, 0); opacity: 1; }
+  to { transform: translate3d(0, 100%, 0); opacity: 0; }
+}
+.x-slide-out-down { animation: var(--animation-duration) var(--animation-timing-function) both xSlideOutDown;}
+
+@keyframes xSlideOutUp {
+  from { transform: translate3d(0, 0, 0);  opacity: 1; }
+  to { transform: translate3d(0, -100%, 0);  opacity: 0;  }
+}
+.x-slide-out-up { animation: var(--animation-duration) var(--animation-timing-function) both xSlideOutUp;}
+
+@keyframes xSlideOutLeft {
+  from { transform: translate3d(0, 0, 0); opacity: 1;  }
+  to { transform: translate3d(-100%, 0, 0);  opacity: 0;  }
+}
+.x-slide-out-left { animation: var(--animation-duration) var(--animation-timing-function) both xSlideOutLeft;}
+
+@keyframes xSlideOutRight {
+  from { transform: translate3d(0, 0, 0); opacity: 1;  }
+  to { transform: translate3d(100%, 0, 0);  opacity: 0;  }
+}
+.x-slide-out-right { animation: var(--animation-duration) var(--animation-timing-function) both xSlideOutRight;}

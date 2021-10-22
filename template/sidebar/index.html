@@ -8,7 +8,7 @@
     <meta name="description" content="{{description}}" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <script src="//unpkg.com/elements-x"></script> <!-- this can be removed for webpack import 'elements-x' in index.js -->
+    <script src="//unpkg.com/elements-x/dist/elements-x.min.js"></script>
 
     <link rel="stylesheet" href="assets/style.css" />
     <script src="assets/script.js"></script>
@@ -19,15 +19,15 @@
         <h1><a href="{{base_path}}" class="logo">{{name}}</a></h1>
         <x-route target="main-contents">
           <ul class="list-unstyled">
-            <div href="{{base_path}}" src="pages/home.html"></div>
-            <li class="active"> <a href="home" src="pages/home.html">Home</a> </li>
+            <div href="{{base_path}}" src="pages/readme.html"></div>
+            <li class="active"> <a href="home" src="pages/readme.html">Home</a> </li>
             <li> <a href="about" src="pages/about.html"> About</a> </li>
             <li> <a href="contact" src="pages/contact.html">Contact</a> </li>
           </ul>
         </x-route>
 
         <div class="footer">
-          This page is made with <i class="fas fa-heart"></i> by
+          This page is built with <i class="fas fa-heart"></i> by
           <a href="//elements-x.github.io/genpage/" target="_blank">genpage</a> 
           from <a href="//github.com/elements-x" target="_blank">elements-x</a>
         </div>

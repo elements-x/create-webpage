@@ -30,7 +30,7 @@ $ cd docs && npx http-server -o
 You can also generate a single file for any markdown file.
 ```
 $ npx genpage README.md 
-$ npx genpage README.md > docs/pages/home.html # to update home.html
+$ npx genpage README.md > docs/pages/readme.html # to update readme.html
 ```
 
 ## To set it as Github pages
