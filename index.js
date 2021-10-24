@@ -3,11 +3,11 @@ const path = require('path');
 const fs = require('fs-extra');
 const inquirer = require('inquirer');
 
-const inquirerQuestions = require('./src/inquirer-questions');
-const { remotePackageInfo, localPackageInfo } = require('./src/package-info');
-const getHTMLFromMarkdown = require('./src/get-html-from-markdown');
-const copyDirAndReplace = require('./src/copy-dir-and-replace');
-const parseShellCommand = require('./src/parse-shell-command');
+const inquirerQuestions = require(path.join(__dirname, 'src/inquirer-questions'));
+const { remotePackageInfo, localPackageInfo } = require(path.join(__dirname, 'src/package-info'));
+const getHTMLFromMarkdown = require(path.join(__dirname, 'src/get-html-from-markdown'));
+const copyDirAndReplace = require(path.join(__dirname, 'src/copy-dir-and-replace'));
+const parseShellCommand = require(path.join(__dirname, 'src/parse-shell-command'));
 
 const {commands, args} = parseShellCommand(process.argv);
 console.log({commands, args});

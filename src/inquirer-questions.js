@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 async function inquirerQuestions(options = {}) {
   const required = val => Promise.resolve(!!val);
 
-  options.name = options.name || 'my-spa-site';
+  options.name = options.name || 'my-webpage';
   options.description = options.description || 'This is my single page application site.';
 
   let answers;
