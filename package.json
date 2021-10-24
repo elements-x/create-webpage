@@ -1,5 +1,5 @@
 {
-  "name": "genpage",
+  "name": "create-webpage",
   "version": "0.2.1",
   "description": "VanillarJS Single Page Web Application Template Generator",
   "repository": "https://github.com/elements-x/genpage",
@@ -15,11 +15,12 @@
   ],
   "dependencies": {
     "fs-extra": "^6.0.1",
-    "http-server": "^13.0.1",
+    "http-server": "^13.0.2",
     "inquirer": "^6.0.0",
     "js-beautify": "^1.14.0",
     "mustache": "^2.3.0",
     "node-fetch": "^2.1.2",
-    "showdown": "^1.9.1"
+    "showdown": "^1.9.1",
+    "yargs": "^17.2.1"
   }
 }
