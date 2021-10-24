@@ -49,8 +49,8 @@ async function run() {
   }
 
   require('child_process').exec('npx http-server -o', {cwd: answers.out_dir});
-  console.log(`Your website is running on http://localhost:8080.`);
-  console.log(`CTRL-C to exit. Run the following to run a local http server.`);
+  console.log(`DONE!! Your webpage is running on http://localhost:8080. CTRL-C to exit.`);
+  console.log(`Run the following to run it again.`);
   console.log(`$ cd ${answers.out_dir}`);
   console.log(`$ npm i`);
   console.log(`$ npx http-server -o`);
