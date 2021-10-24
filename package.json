@@ -1,6 +1,6 @@
 {
   "name": "create-webpage",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "VanillarJS Single Page Web Application Template Generator",
   "repository": "https://github.com/elements-x/genpage",
   "publishConfig": {
