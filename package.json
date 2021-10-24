@@ -11,7 +11,8 @@
   },
   "files": [
     "index.js",
-    "template"
+    "template",
+    "src"
   ],
   "dependencies": {
     "fs-extra": "^6.0.1",
