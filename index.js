@@ -9,7 +9,6 @@ const copyDirAndReplace = require(path.join(__dirname, 'src/copy-dir-and-replace
 const parseShellCommand = require(path.join(__dirname, 'src/parse-shell-command'));
 
 const {commands, args} = parseShellCommand(process.argv);
-console.log({commands, args});
 
 if ((commands[0] || '').match(/\.md$/)) { // markdown file to html
   (async function() {
@@ -41,7 +40,7 @@ async function run() {
   // write pages/readme.html from README.md
   const readmePath = 
     user && repoName ? `https://raw.githubusercontent.com/${user}/${repoName}/main/README.md` : 
-    path.existsSync(path.join(answers.out_dir, 'README.md')) ? path.join(answers.out_dir, 'README.md') :
+    fs.existsSync(path.join(answers.out_dir, 'README.md')) ? path.join(answers.out_dir, 'README.md') :
     null;
   if (readmePath) {
     const readmeHtmlPath = path.join(answers.out_dir, 'pages', 'readme.html');
@@ -49,5 +48,6 @@ async function run() {
     fs.outputFileSync(readmeHtmlPath,  readmeHtml ); 
   }
 
+  require('child_process').exec('npx http-server -p 8080 -c-1', {cwd: answers.out_dir});
   console.log(`Done. To open pages run "cd ${answers.out_dir} && npx http-server -o"`);
 }
