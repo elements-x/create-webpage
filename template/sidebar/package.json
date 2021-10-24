@@ -1,5 +1,5 @@
 {
-  "name": "my-spa-site",
+  "name": "{{name}}",
   "scripts": {
     "start": "bojagi serve",
     "build": "bojagi build"

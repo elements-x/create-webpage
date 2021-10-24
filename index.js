@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 const path = require('path');
 const fs = require('fs-extra');
-const inquirer = require('inquirer');
 
 const inquirerQuestions = require(path.join(__dirname, 'src/inquirer-questions'));
 const { remotePackageInfo, localPackageInfo } = require(path.join(__dirname, 'src/package-info'));
@@ -40,12 +39,15 @@ async function run() {
   copyDirAndReplace(path.join(__dirname, 'template', answers.template), answers.out_dir, answers);
 
   // write pages/readme.html from README.md
-  const readmePath = user && repoName ?
-    `https://raw.githubusercontent.com/${user}/${repoName}/main/README.md` : 
-    path.join(process.cwd(), 'README.md');
-  const readmeHtmlPath = path.join(answers.out_dir, 'pages', 'readme.html');
-  const readmeHtml = await getHTMLFromMarkdown(readmePath);;
-  fs.outputFileSync(readmeHtmlPath,  readmeHtml ); 
+  const readmePath = 
+    user && repoName ? `https://raw.githubusercontent.com/${user}/${repoName}/main/README.md` : 
+    path.existsSync(path.join(answers.out_dir, 'README.md')) ? path.join(answers.out_dir, 'README.md') :
+    null;
+  if (readmePath) {
+    const readmeHtmlPath = path.join(answers.out_dir, 'pages', 'readme.html');
+    const readmeHtml = await getHTMLFromMarkdown(readmePath);;
+    fs.outputFileSync(readmeHtmlPath,  readmeHtml ); 
+  }
 
   console.log(`Done. To open pages run "cd ${answers.out_dir} && npx http-server -o"`);
 }
