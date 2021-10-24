@@ -48,11 +48,10 @@ async function run() {
     fs.outputFileSync(readmeHtmlPath,  readmeHtml ); 
   }
 
-  require('child_process').exec('npx http-server -p 8080 -c-1 -o', {cwd: answers.out_dir});
+  require('child_process').exec('npx http-server -o', {cwd: answers.out_dir});
   console.log(`Your website is running on http://localhost:8080.`);
   console.log(`CTRL-C to exit. Run the following to run a local http server.`);
   console.log(`$ cd ${answers.out_dir}`);
   console.log(`$ npm i`);
   console.log(`$ npx http-server -o`);
-  process.exit(0);
 }
