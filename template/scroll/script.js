@@ -50,8 +50,9 @@ function intersectionObserverCallback(entries, observer) {
       document.body.style.backgroundColor = bgColor;
       luminance < .5 && document.body.classList.add('dark-bg');
       setNavItem(entry.target.id);
+
       const animateEls = entry.target.children.length === 1 ? 
-        entry.target.children.children : entry.target.children;
+        entry.target.children[0].children : entry.target.children;
       show1by1(animateEls);
     }
   });

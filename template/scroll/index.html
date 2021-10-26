@@ -13,13 +13,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="//unpkg.com/elements-x/dist/elements-x.min.js"></script>
-
+    
     <!-- Following should be removed for webpack users. For webpack, see webpack main entry, index.js -->
     <script src="assets/chroma.min.js"></script> <!-- window.chroma-->
-    <script src="assets/animate-x.js"></script> <!-- window.animate -->
+    <script src="assets/animate-x.js" type="module"></script> <!-- window.animate -->
     <!-- Global css and  -->
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js" async></script>
+    <script src="script.js"></script>
   </head>
   <body>
     <nav class="nav-bar vertical">
@@ -40,23 +40,28 @@
       </div>
     </nav>
 
-    <div id="intro" class="contents" data-color="#6f3d3c">
+    <div id="intro" class="contents" data-color="#6f3d3c" 
+      style="--bg-image:url(assets/images/bicycle.png)">
       <x-include src="pages/intro.html"></x-include>
     </div>
 
-    <div id="home" class="contents" data-color="#F2FFE4">
+    <div id="home" class="contents" data-color="#F2FFE4"
+      style="--bg-image:url(assets/images/antique-fan.png)">
       <x-include src="pages/readme.html"></x-include>
     </div>
 
-    <div id="contact" class="contents" data-color="#6F3D3C">
+    <div id="contact" class="contents" data-color="#6F3D3C"
+      style="--bg-image:url(assets/images/arm-chair.png)">
       <x-include src="pages/contact.html"></x-include>
     </div>
 
-    <div id="about" class="contents" data-color="#FEACC9">
+    <div id="about" class="contents" data-color="#FEACC9"
+      style="--bg-image:url(assets/images/bamboo.png)">
       <x-include src="pages/about.html"></x-include>
     </div>
 
-    <div id="more" class="contents" data-color="#9E7E7E">
+    <div id="more" class="contents" data-color="#9E7E7E"
+      style="--bg-image:url(assets/images/book.png)">
       <x-include src="pages/more.html"></x-include>
     </div>
   </body>

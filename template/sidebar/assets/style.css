@@ -1,6 +1,5 @@
 @import './normalize.css';
 @import './github-markdown.css';
-/* @import './fontawesome/css/all.min.css'; */
 
 html {
   --text-color: #0a244d;
@@ -68,7 +67,7 @@ h3,.h3 { font-size: 1.75rem; margin-bottom: 1.4rem; }
 }
 
 .navbar { 
-  padding: 15px 10px; margin-bottom: 40px; box-shadow: var(--box-shadow);
+  padding: 15px 10px; 
   display: flex; align-items: center; font-size: 24px; min-width: 320px;
 }
 .navbar .custom-menu {

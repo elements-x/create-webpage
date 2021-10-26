@@ -1,6 +1,5 @@
 @import './assets/normalize.css';
 @import './assets/github-markdown.css';
-@import './assets/fontawesome/css/all.min.css';
 @import './assets/nav-bar.css';
 
 * {box-sizing: border-box;}
@@ -28,7 +27,15 @@ body.dark-bg .nav-bar > .nav-item.active:after {
 .contents {
   min-height: 200vh;
   text-align: center;
-  /* display: flex; align-items:center; justify-content: center; */
+  padding: 1rem;
+  position: relative;
+}
+.contents:before {
+  content: var(--bg-image);
+  position: absolute;
+  opacity: .5;
+  left: 20vw;
+  top: 50vh;
 }
 .contents:after { /* spacer between pages for smooth color transition */
   content: '';
