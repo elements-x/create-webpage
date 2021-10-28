@@ -6,20 +6,31 @@ Generate an introductory webpage, also using package.json and README.md
 ## Example
   * https://elements-x.github.io/create-webpage/sidebar
   * https://elements-x.github.io/create-webpage/scroll
-
-## Usage
+  
+## Default usage.
 ```
-**$ npm init webpage**
-? **Project Name** create-webpage
-? **Description** VanillarJS Single Page Web Application Template Generator
-? **Choose a Template** Sidebar - A navigation menu on the left, contents on the right
-? **Version** 0.2.9
-? **Repo**. URL https://github.com/elements-x/genpage
-? **Issue** URL https://github.com/elements-x/genpage/issues
-? **License** MIT
-? ** Output Directory** docs/sidebar
-? **Base Path** /
-* Processing answers { .... }
+$  npm init webpage
+? Project Name my-webpage
+? Description This is my single page application site.
+? Template sidebar
+? Output Directory my-webpage
+? Base Path /
+* Processing answers  ...
+```
+
+## Usage for git repo.
+```
+$ npm init webpage
+? Project Name create-webpage
+? Description VanillarJS Single Page Web Application Template Generator
+? Choose a Template Sidebar - A navigation menu on the left, contents on the right
+? Version 0.2.9
+? Repo. URL https://github.com/elements-x/genpage
+? Issue URL https://github.com/elements-x/genpage/issues
+? License MIT
+? Output Directory docs/sidebar
+? Base Path /
+* Processing answers  .... 
 ```
 
 You can also generate a single file from a markdown file.
