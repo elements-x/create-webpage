@@ -6,6 +6,7 @@
 body {
   font-family: Lato, --apple-system, sans-serif;
   transition: background-color 2s;
+  font-size: 16px;
 }
 body:not(.a11y-outline) :focus {
   outline: none;
@@ -23,19 +24,26 @@ body.dark-bg .nav-bar > *:after {
 body.dark-bg .nav-bar > .nav-item.active:after {
   background: #FFF;
 }
+.nav-bar {
+  z-index: 1;
+}
 
 .contents {
   min-height: 200vh;
-  text-align: center;
   padding: 1rem;
   position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.contents x-pre {
+  background: rgba(250, 250, 250, .3)
 }
 .contents:before {
   content: var(--bg-image);
   position: absolute;
   opacity: .5;
-  left: 20vw;
-  top: 50vh;
+  left: var(--bg-left, 40vw);
+  top: var(--bg-top, 50vh);
 }
 .contents:after { /* spacer between pages for smooth color transition */
   content: '';

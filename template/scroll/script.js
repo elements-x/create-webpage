@@ -22,6 +22,7 @@ function disableOutline() {
 }
 
 function setNavItem(navItemId) {
+  console.log({navItemId})
   $('.nav-bar .nav-item.active').classList.remove('active');
   $(`#${navItemId}`).scrollIntoView({behavior: 'smooth'});
   $(`.nav-bar [data-nav="${navItemId}"]`).classList.add('active');
@@ -43,7 +44,8 @@ function show1by1(els, wait=0, effect='zoomIn') {
 // developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 function intersectionObserverCallback(entries, observer) {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
+    const inView = entry.intersectionRatio > 0 
+    if (entry.isIntersecting && !window._transitioning && inView) {
       const bgColor = entry.target.getAttribute('data-color');
       const luminance = chroma(bgColor).luminance();
       document.body.classList.remove('dark-bg');
@@ -54,6 +56,8 @@ function intersectionObserverCallback(entries, observer) {
       const animateEls = entry.target.children.length === 1 ? 
         entry.target.children[0].children : entry.target.children;
       show1by1(animateEls);
+      window._transitioning = true;
+      setTimeout(_ => window._transitioning = false, 100);
     }
   });
 }
@@ -64,5 +68,9 @@ window.addEventListener('DOMContentLoaded', function() {
   
   const observer = new IntersectionObserver(intersectionObserverCallback);
   $All('.contents').forEach(el => observer.observe(el));
-  $All('.nav-item').forEach(el => el.addEventListener('click', _ => setNavItem(el.dataset.nav)) );
+  $All('.nav-item').forEach(el => el.addEventListener('click', _ => {
+    setNavItem(el.dataset.nav);
+    window._transitioning = true;
+    setTimeout(_ => window._transitioning = false, 500);
+  }));
 });
