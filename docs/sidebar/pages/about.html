@@ -1,0 +1,86 @@
+<h2 class="x-h2">ABOUT</h2>
+
+This page is from pages/about.html.
+
+<p>
+  <b>genpage</b> create a website instantly without using a framework focusing 
+   on simplicity and flexibility.  What you need to know is HTML and CSS 
+   to publish your webpage on the internet.
+</p>
+
+<h3 class="x-h3">Icons</h3>
+<p>
+  As you see in your html, it uses fontawesome icons in default. Thus, you can use any icon you want.
+  You can find icons at <a href="https://fontawesome.com/v5.15/icons">fontawesome site</a>.
+</p>
+<x-pre>
+  &lt;link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</x-pre>
+
+<h3 class="x-h3">Built-in Customized Elements</h3>
+<p>
+  This site also has built-in customized elements from <a href="https://elements-x">elements-x</a>.
+</p>
+<x-pre>
+  &lt;script src="//unpkg.com/elements-x@2.1.2/dist/elements-x.min.js">&lt;/script>
+</x-pre>
+
+<p>
+  <x-button> Default </x-button>
+  <x-button class="primary"> Primary </x-button>
+  <x-button class="accent"> Accent </x-button>
+  <x-button disabled> Disabled </x-button>
+  <x-pre>
+    &lt;x-button> Default &lt;/x-button>
+    &lt;x-button class="primary"> Primary &lt;/x-button>
+    &lt;x-button class="accent"> Accent &lt;/x-button>
+    &lt;x-button disabled> Disabled &lt;/x-button>
+  </x-pre>
+</p>
+
+<p>
+  <x-input type="text" label="username"></x-input>
+  <x-pre>&lt;x-input type="text" label="username">&lt;/x-input></x-pre>
+</p>
+
+<p>
+  <x-input type="checkbox"></x-input><x-input checked type="checkbox"></x-input>
+  <x-pre>&lt;x-input type="checkbox">&lt;/x-input></x-pre>
+</p>
+
+<p>
+  <x-input type="radio" name="r1"></x-input>
+  <x-input type="radio" name="r1" checked></x-input>
+  <x-pre>&lt;x-input type="radio" name="r1">&lt;/x-input></x-pre>
+</p>
+
+<p>
+  <x-input type="switch" status="on" on="Yes" off="No"></x-input>
+  <x-input type="switch" status="off" on="Yes" off="No"></x-input>
+  <x-pre>&lt;x-input type="switch" on="Yes" off="No">&lt;/x-input></x-pre>
+</p>
+
+<p>
+  <x-select>
+    <option value=""> Select role...</option>
+    <option value="fe">Frontend Engineer</option>
+    <option value="be">Backend Engineer</option>
+  </x-select>
+  <x-pre>
+    &lt;x-select>
+      &lt;option value=""> Select role...&lt;/option>
+      &lt;option value="fe">Frontend Engineer&lt;/option>
+      &lt;option value="be">Backend Engineer&lt;/option>
+    &lt;/x-select>
+  </x-pre>
+</p>
+
+<p>
+  <x-calendar style="width: 400px"></x-calendar>
+  <x-pre>&lt;x-calendar style="width: 400px">&lt;/x-calendar></x-pre>
+</p>
+
+<p>
+  <x-clock run="true"></x-clock>
+  <x-pre>&lt;x-clock run="true">&lt;/x-clock></x-pre>
+</p>

@@ -4,8 +4,8 @@
     <base href=".">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{description}}</title>
-    <meta name="description" content="{{description}}" />
+    <title>VanillarJS Single Page Web Application Template Generator</title>
+    <meta name="description" content="VanillarJS Single Page Web Application Template Generator" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="https://unpkg.com/elements-x@2.1.9/dist/elements-x.min.js"></script>
@@ -16,10 +16,10 @@
   <body>
     <div class="wrapper">
       <div id="sidebar" class="sidebar contents">
-        <h1><a href="{{base_path}}" class="logo">{{name}}</a></h1>
+        <h1><a href="sidebar&#x2F;" class="logo">create-webpage</a></h1>
         <x-route target="main-contents">
           <ul class="list-unstyled">
-            <div href="{{base_path}}" src="pages/readme.html"></div>
+            <div href="sidebar&#x2F;" src="pages/readme.html"></div>
             <li class="active"> <a href="home" src="pages/readme.html">Home</a> </li>
             <li> <a href="about" src="pages/about.html"> About</a> </li>
             <li> <a href="contact" src="pages/contact.html">Contact</a> </li>
@@ -39,9 +39,9 @@
             <i class="fas fa-bars"></i>
           </button>
           <div class="links">
-            <a href="{{{repo_url}}}"><i class="fab fa-github"></i></a>
-            <a href="{{{issue_url}}}"><i class="fas fa-comments"></i></a>
-            <a href="{{{repo_url}}}"><i class="fas fa-star"></i></i></a>
+            <a href="https://github.com/elements-x/genpage"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/elements-x/genpage/issues"><i class="fas fa-comments"></i></a>
+            <a href="https://github.com/elements-x/genpage"><i class="fas fa-star"></i></i></a>
           </div>
           <x-input id="dark-mode-switch" class="dark-mode-switch" type="switch" on="Light" off="Dark" color="#222"></x-input>
         </div>

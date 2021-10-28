@@ -26,7 +26,7 @@ if ((commands[0] || '').match(/\.md$/)) { // markdown file to html
 //  3. test witth remote package.json
 async function run() {
   const [user, repoName] = commands;
-  const pkgInfo = user && repoName ?  await remotePackageInfo(user, repoName) : localPackageInfo() || {};
+  const pkgInfo = user && repoName ?  await remotePackageInfo(user, repoName) : await localPackageInfo() || {};
 
   // show questions and get answers from user
   const answers = await inquirerQuestions(pkgInfo);

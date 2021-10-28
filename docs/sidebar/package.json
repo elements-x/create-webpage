@@ -1,0 +1,11 @@
+{
+  "name": "create-webpage",
+  "scripts": {
+    "start": "bojagi serve",
+    "build": "bojagi build"
+  },
+  "devDependencies": {
+    "bojagi": "^0.1.4",
+    "http-server": "^14.0.0"
+  }
+}

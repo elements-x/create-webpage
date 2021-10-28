@@ -1,0 +1,54 @@
+@import './assets/normalize.css';
+@import './assets/github-markdown.css';
+@import './assets/nav-bar.css';
+
+* {box-sizing: border-box;}
+body {
+  font-family: Lato, --apple-system, sans-serif;
+  transition: background-color 2s;
+  font-size: 16px;
+}
+body:not(.a11y-outline) :focus {
+  outline: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+body.dark-bg {
+  color: #FFF;
+}
+
+body.dark-bg .nav-bar > *:after {
+  border: 1px solid #FFF;
+}
+body.dark-bg .nav-bar > .nav-item.active:after {
+  background: #FFF;
+}
+a {color: inherit;}
+
+.nav-bar {
+  z-index: 1;
+}
+
+.contents {
+  min-height: 200vh;
+  padding: 1rem;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.contents x-pre {
+  background: rgba(250, 250, 250, .3)
+}
+.contents:before {
+  content: var(--bg-image);
+  position: absolute;
+  opacity: .5;
+  left: var(--bg-left, 40vw);
+  top: var(--bg-top, 50vh);
+}
+.contents:not(:last-child):after { /* spacer between pages for smooth color transition */
+  content: '';
+  display: block;
+  height: 100vh;
+}

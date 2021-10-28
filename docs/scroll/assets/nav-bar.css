@@ -1,0 +1,50 @@
+.nav-bar {
+  position: fixed;
+  top: 0;
+  display: flex;
+  text-transform: uppercase;
+  font-size: 1em;
+  transform: scale(.9);
+}
+.nav-bar.vertical {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) scale(90%);
+  writing-mode: vertical-lr;
+}
+.nav-bar.vertical > .nav-item {
+  margin: 12px 0 0 0;
+}
+.nav-bar > .nav-item {
+  display: flex;
+  white-space: nowrap;
+  cursor: pointer;
+  align-items: center;
+  margin: 0 0 0 12px;
+}
+.nav-bar > .nav-item .text {
+  max-width: 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  line-height: 1em;
+  transition: all 1s;
+}
+.nav-bar > .nav-item:hover .text, 
+.nav-bar > .nav-item.active .text {
+  max-width: 100px;
+  max-height: 100px;
+  opacity: 1;
+  padding: 4px;
+}
+.nav-bar > *:after {
+  content: '';
+  border: 1px solid #333;
+  width: .8em;
+  height: .8em;
+  display: inline-block;
+  border-radius: 50%;
+}
+.nav-bar > .nav-item.active:after {
+  background: #333;
+}
