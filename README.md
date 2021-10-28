@@ -1,40 +1,34 @@
-# genpage
-Single Page Web Application Template Generator.
+# create-webpage
+Web page generator including SPA, single page application.
 
-Generate an introductory webpage using package.json and README.md
+Generate an introductory webpage, also using package.json and README.md
 
 ## Example
-  * https://elements-x.github.io/touch-x/
-  * https://elements-x.github.io/genpage/
+  * https://elements-x.github.io/create-webpage/sidebar
+  * https://elements-x.github.io/create-webpage/scroll
 
 ## Usage
 ```
-$ npm i genpage -D
-$ npx genpage
-* Start generating web page for genpage
-? Project Name genpage
-? Output Directory docs
-? Description VanillarJS Single Page Web Application Template Generator
-? Version 0.2.0
-? Repo. URL https://github.com/elements-x/genpage
-? Issue URL https://github.com/elements-x/genpage/issues
-? License MIT
-... processing message ...
+**$ npm init webpage**
+? **Project Name** create-webpage
+? **Description** VanillarJS Single Page Web Application Template Generator
+? **Choose a Template** Sidebar - A navigation menu on the left, contents on the right
+? **Version** 0.2.9
+? **Repo**. URL https://github.com/elements-x/genpage
+? **Issue** URL https://github.com/elements-x/genpage/issues
+? **License** MIT
+? ** Output Directory** docs/sidebar
+? **Base Path** /
+* Processing answers { .... }
 ```
 
-To see the generated page
+You can also generate a single file from a markdown file.
 ```
-$ cd docs && npx http-server -o
-```
-
-You can also generate a single file for any markdown file.
-```
-$ npx genpage README.md 
-$ npx genpage README.md > docs/pages/readme.html # to update readme.html
+$ npm init webpage README.md 
 ```
 
 ## To set it as Github pages
-Generated webpage is fully working as a SPA; Single Page Application. 
+A generated webpage is fully working as a SPA; Single Page Application. 
 You can use it as your github page without any settings or modifiation.
 
 To set your github page with your generated `docs` directory,
