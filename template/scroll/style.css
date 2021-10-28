@@ -24,6 +24,8 @@ body.dark-bg .nav-bar > *:after {
 body.dark-bg .nav-bar > .nav-item.active:after {
   background: #FFF;
 }
+a {color: inherit;}
+
 .nav-bar {
   z-index: 1;
 }

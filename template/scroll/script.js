@@ -22,7 +22,7 @@ function disableOutline() {
 }
 
 function setNavItem(navItemId) {
-  console.log({navItemId})
+  // console.log({navItemId})
   $('.nav-bar .nav-item.active').classList.remove('active');
   $(`#${navItemId}`).scrollIntoView({behavior: 'smooth'});
   $(`.nav-bar [data-nav="${navItemId}"]`).classList.add('active');
