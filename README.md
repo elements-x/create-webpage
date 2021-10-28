@@ -1,13 +1,13 @@
 # create-webpage
-Web page generator including SPA, single page application.
+`npm init webpage`, a web page generator.
 
-Generate an introductory webpage, also using package.json and README.md
+Generate a webpage, also using package.json and README.md
 
 ## Example
   * https://elements-x.github.io/create-webpage/sidebar
   * https://elements-x.github.io/create-webpage/scroll
   
-## Default usage.
+## Usage
 ```
 $  npm init webpage
 ? Project Name my-webpage
