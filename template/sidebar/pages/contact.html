@@ -8,6 +8,11 @@ This page is from pages/contact.html.
 </p>
 
 <p>
-  <x-openlayers center="Toronto, Canada"></x-openlayers>
+  <x-openlayers satellite style="height: 400px">
+    <x-ol-marker position="Toronto, Canada" center="center">
+      <b>{{name}}</b>
+      <div>We are here.</div>
+    </x-ol-marker>
+  </x-openlayers>
   <x-pre>&lt;x-openlayers center="Toronto, Canada">&lt;/x-openlayers></x-pre>
 </p>
