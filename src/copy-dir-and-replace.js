@@ -17,10 +17,12 @@ function copyDirAndReplace(fromDir, toDir, replacements = {}) {
     const fileContents = fs.readFileSync(file, 'utf8');
     const outputPath = path.join(toDir, file.replace(fromDir, ''));
     let outputContents = fileContents;
-    try {
-      outputContents = mustache.render(fileContents, replacements);
-    } catch (e) {
-      console.error(e);
+    if (file.match(/\.(html|json|txt|css)$/)) {
+      try {
+        outputContents = mustache.render(fileContents, replacements);
+      } catch (e) {
+        // console.error(e);
+      }
     }
     fs.outputFileSync(outputPath, outputContents);
   });

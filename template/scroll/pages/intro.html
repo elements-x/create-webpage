@@ -13,6 +13,22 @@
   50%  { opacity: 1;  }
   100% { transform:translateY(20px); opacity: 0; }
 }
+.text-background {
+  text-align: center;
+  padding: 0 15vw;
+  font-family: 'Erica One', cursive;
+  line-height: 1em;
+  font-size: 10em;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: url('https://picsum.photos/600/500');
+  filter: drop-shadow(1px 1px #FFF);
+  text-transform: uppercase;
+  width: 100vw;
+  position: relative;
+  left: calc(-50vw + 50%);
+}
 </style>
 
 <h2 class="x-h2">INTRO</h2>
@@ -21,8 +37,10 @@
 </p>
 
 <div style="text-align: center">
-  <h1 class="x-h1">{{name}}</h1>
-  <h2 class="x-h2">{{description}}</h2>
+  <div class="text-background">{{name}}</div>
+  <p>
+    <h2 class="x-h2">{{description}}</h2>
+  </p>
 </div>
 
 <div class="scroll-down"><i class="fas fa-angle-down"></i></div>
