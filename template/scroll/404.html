@@ -21,12 +21,7 @@
       // https://username.github.io/repo-name/one/two?a=b&c=d#qwe becomes
       // https://username.github.io/repo-name/?/one/two&a=b~and~c=d#qwe
       // Otherwise, leave pathSegmentsToKeep as 0.
-      var pathSegmentsToKeep = 0;
-      if (window.location.pathname.match('{{{base_path}}}')) {
-        pathSegmentsToKeep = ('{{{base_path}}}'.match(/[^\/]+/g) || []).length;
-      }
-      // console.log('debugging', {pathSegmentsToKeep});
-
+      var pathSegmentsToKeep = {{pathSegmentsToKeep}};
       var l = window.location;
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +

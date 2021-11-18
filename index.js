@@ -1,14 +1,19 @@
 #!/usr/bin/env node
 const path = require('path');
 const fs = require('fs-extra');
+const yargs = require('yargs/yargs')
+const { hideBin } = require('yargs/helpers')
 
 const inquirerQuestions = require(path.join(__dirname, 'src/inquirer-questions'));
 const { remotePackageInfo, localPackageInfo } = require(path.join(__dirname, 'src/package-info'));
 const getHTMLFromMarkdown = require(path.join(__dirname, 'src/get-html-from-markdown'));
 const copyDirAndReplace = require(path.join(__dirname, 'src/copy-dir-and-replace'));
-const parseShellCommand = require(path.join(__dirname, 'src/parse-shell-command'));
 
-const {commands, args} = parseShellCommand(process.argv);
+const argv = yargs(hideBin(process.argv)).argv
+const commands =  argv._ || [];
+const args = Object.assign({}, argv);
+delete args._;
+delete args.$0;
 
 if ((commands[0] || '').match(/\.md$/)) { // markdown file to html
   (async function() {
@@ -30,8 +35,11 @@ async function run() {
 
   // show questions and get answers from user
   const answers = await inquirerQuestions(pkgInfo);
-  !answers.base_path.endsWith('/') && (answers.base_path += '/');
   console.log(`* Processing answers ${JSON.stringify(answers, null, '  ')}`);
+
+  answers.pathSegmentsToKeep = answers.out_dir.split('/').length - 1;
+  answers.jsAppType = answers.app_type === 'js';
+  answers.staticAppType = answers.app_type === 'static';
 
   // copy files to destination
   fs.rmdirSync(answers.out_dir, { recursive: true, force: true });

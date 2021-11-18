@@ -14,7 +14,13 @@ async function inquirerQuestions(options = {}) {
       {type: 'list', name: 'template', message: 'Choose a Template', default: templateDflt, 
         choices: [
           {value: 'sidebar', name: 'Sidebar - A navigation menu on the left, contents on the right'},
-          {value: 'scroll', name: 'Scroll - A long single page template navigation on the right'},
+          {value: 'scroll', name: 'Scroll - A long single page template navigation on the right'}
+        ]
+      },
+      {type: 'list', name: 'app_type', message: 'Choose Application Type', default: 'js', 
+        choices: [
+          {value: 'js', name: 'Javascript Applicatin - main.js + esbuild'},
+          {value: 'static', name: 'Static HTML - index.html'}
         ]
       }
     ]);
@@ -30,16 +36,17 @@ async function inquirerQuestions(options = {}) {
       {type: 'input', name: 'repo_url', message: 'Repo. URL', default: options.html_url, validate: required},
       {type: 'input', name: 'issue_url', message: 'Issue URL', default: options.issue_events_url},
       {type: 'input', name: 'license', message: 'License', default: options.license},
-      {type: 'input', name: 'out_dir', message: 'Output Directory', default: 'docs', validate: required},
-      {type: 'input', name: 'base_path', message: 'Base Path', default: '/'},
+      {type: 'input', name: 'out_dir', message: 'Output Directory', default: 'docs', validate: required}
     ])
     
     answers = {...answers1, ...answers2};
   } else {
     const answers2 = await inquirer.prompt([
-      {type: 'input', name: 'out_dir', message: 'Output Directory', 
-        default: answers1.name.toLowerCase().replace(/[^a-z0-9]/g, '-'), validate: required},
-      {type: 'input', name: 'base_path', message: 'Base Path', default: '/'},
+      {
+        type: 'input', name: 'out_dir', message: 'Output Directory', 
+        default: answers1.name.toLowerCase().replace(/[^a-z0-9]/g, '-'), 
+        validate: required
+      }
     ]);
 
     answers = {...answers1, ...answers2};

@@ -1,0 +1,19 @@
+{
+  "name": "my-webpage",
+  "version": "1.0.0",
+  "description": "my description",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "esbuild-x serve",
+    "build": "esbuild-x build"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "chroma-js": "^2.1.2",
+    "elements-x": "^2.1.11",
+    "esbuild-x": "^0.4.0",
+    "open": "^8.4.0"
+  }
+}
