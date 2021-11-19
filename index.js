@@ -56,10 +56,17 @@ async function run() {
     fs.outputFileSync(readmeHtmlPath,  readmeHtml ); 
   }
 
-  require('child_process').exec('npx http-server -o', {cwd: answers.out_dir});
-  console.log(`DONE!! Your webpage is running on http://localhost:8080. CTRL-C to exit.`);
-  console.log(`Run the following to run it again.`);
-  console.log(`$ cd ${answers.out_dir}`);
-  console.log(`$ npm i`);
-  console.log(`$ npx http-server -o`);
+  if (answers.staticAppType) {
+    require('child_process').exec('npx http-server -o', {cwd: answers.out_dir});
+    console.log(`DONE!! Your webpage is running on http://localhost:8080. CTRL-C to exit.`);
+    console.log(`Run the following to run it again.`);
+    console.log(`$ cd ${answers.out_dir}`);
+    console.log(`$ npm i`);
+    console.log(`$ npx http-server -o`);
+  } else if (answers.jsAppType) {
+    console.log(`Run the following command to start your js app.`);
+    console.log(`$ cd ${answers.out_dir}`);
+    console.log(`$ npm i`);
+    console.log(`$ npm start`);
+  }
 }

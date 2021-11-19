@@ -1,5 +1,6 @@
 window.$ = document.querySelector.bind(document);
 window.$All= document.querySelectorAll.bind(document);
+window._menuClicked = false;
 
 // Single Page Apps for GitHub Pages https://github.com/rafgraph/spa-github-pages
 // if a redirect is present in the query string, converts it back into the correct url
@@ -21,13 +22,6 @@ function disableOutline() {
   document.body.addEventListener('keydown', e => (e.key === 'Tab') && document.body.classList.add('a11y-outline') );
 }
 
-function setNavItem(navItemId) {
-  // console.log({navItemId})
-  $('.nav-bar .nav-item.active').classList.remove('active');
-  $(`#${navItemId}`).scrollIntoView({behavior: 'smooth'});
-  $(`.nav-bar [data-nav="${navItemId}"]`).classList.add('active');
-}
-
 function show1by1(els, wait=0, effect='zoomIn') {
   Array.from(els).forEach( (el, i) => {
     el.style.visibility = 'hidden';
@@ -41,23 +35,31 @@ function show1by1(els, wait=0, effect='zoomIn') {
   });
 }
 
+function setNavItem(navItemId) {
+  $('.nav-bar .nav-item.active').classList.remove('active');
+  $(`#${navItemId}`).scrollIntoView({behavior: 'smooth'});
+  $(`.nav-bar [data-nav="${navItemId}"]`).classList.add('active');
+  runTransition($(`#${navItemId}`));
+}
+
+function runTransition(toEl) {
+  const bgColor = toEl.getAttribute('data-color');
+  const luminance = chroma(bgColor).luminance();
+  document.body.classList.remove('dark-bg');
+  document.body.style.backgroundColor = bgColor;
+  luminance < .5 && document.body.classList.add('dark-bg');
+
+  const animateEls = toEl.children.length === 1 ?  toEl.children[0].children : toEl.children;
+  show1by1(animateEls);
+}
+
 // developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 function intersectionObserverCallback(entries, observer) {
   entries.forEach(entry => {
-    const inView = entry.intersectionRatio > 0 
-    if (entry.isIntersecting && !window._transitioning && inView) {
-      const bgColor = entry.target.getAttribute('data-color');
-      const luminance = chroma(bgColor).luminance();
-      document.body.classList.remove('dark-bg');
-      document.body.style.backgroundColor = bgColor;
-      luminance < .5 && document.body.classList.add('dark-bg');
-      setNavItem(entry.target.id);
-
-      const animateEls = entry.target.children.length === 1 ? 
-        entry.target.children[0].children : entry.target.children;
-      show1by1(animateEls);
-      window._transitioning = true;
-      setTimeout(_ => window._transitioning = false, 100);
+    const inView = entry.intersectionRatio > 0;
+    if (inView && !window._menuClicked) {
+      runTransition(entry.target); // run background transition and animation
+      setNavItem(entry.target.id); // set menu item active
     }
   });
 }
@@ -70,7 +72,7 @@ window.addEventListener('DOMContentLoaded', function() {
   $All('.contents').forEach(el => observer.observe(el));
   $All('.nav-item').forEach(el => el.addEventListener('click', _ => {
     setNavItem(el.dataset.nav);
-    window._transitioning = true;
-    setTimeout(_ => window._transitioning = false, 500);
+    window._menuClicked = true;
+    setTimeout(_ => window._menuClicked = false, 500);
   }));
 });

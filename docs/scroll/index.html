@@ -8,19 +8,17 @@
     <meta name="description" content="VanillarJS Single Page Web Application Template Generator" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Erica+One&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <script src="https://unpkg.com/elements-x@2.1.9/dist/elements-x.min.js"></script>
-    
-    <!-- Following should be removed for webpack users. For webpack, see webpack main entry, index.js -->
-    <script src="assets/chroma.min.js"></script> <!-- window.chroma-->
-    <script src="assets/animate-x.js" type="module"></script> <!-- window.animate -->
-    <!-- Global css and  -->
     <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/elements-x@2.1.9/dist/elements-x.min.js"></script>
+    <script src="assets/chroma.min.js"></script>
+    <script src="assets/animate-x.js" type="module"></script>
     <script src="script.js"></script>
   </head>
   <body>
@@ -64,7 +62,7 @@
 
     <div id="more" class="contents" data-color="#Fbe2e0"
       style="--bg-image:url(assets/images/hun-min-jeung-eum.png);">
-    <x-include src="pages/more.html"></x-include>
+      <x-include src="pages/more.html"></x-include>
     </div>
   </body>
 </html>

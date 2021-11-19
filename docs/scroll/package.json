@@ -1,7 +1,7 @@
 {
-  "name": "{{name}}",
-  "version": "0.1.0",
-  "description": "{{description}}",
+  "name": "create-webpage",
+  "version": "1.0.0",
+  "description": "VanillarJS Single Page Web Application Template Generator",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,6 +11,7 @@
   "license": "MIT",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "chroma-js": "^2.1.2",
     "elements-x": "^2.1.11",
     "esbuild-x": "^0.4.0",
     "open": "^8.4.0"

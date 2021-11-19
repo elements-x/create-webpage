@@ -17,10 +17,10 @@ async function inquirerQuestions(options = {}) {
           {value: 'scroll', name: 'Scroll - A long single page template navigation on the right'}
         ]
       },
-      {type: 'list', name: 'app_type', message: 'Choose Application Type', default: 'js', 
+      {type: 'list', name: 'app_type', message: 'Choose Application Type', default: 'static', 
         choices: [
-          {value: 'js', name: 'Javascript Applicatin - main.js + esbuild'},
-          {value: 'static', name: 'Static HTML - index.html'}
+          {value: 'static', name: 'Static HTML - index.html'},
+          {value: 'js', name: 'Javascript Applicatin - main.js + esbuild'}
         ]
       }
     ]);
