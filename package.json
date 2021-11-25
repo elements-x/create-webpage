@@ -2,12 +2,9 @@
   "name": "create-webpage",
   "version": "0.3.1",
   "description": "VanillarJS Single Page Web Application Template Generator",
-  "repository": "https://github.com/elements-x/genpage",
+  "repository": "https://github.com/elements-x/create-webpage",
   "publishConfig": {
     "registry": "https://registry.npmjs.com/"
-  },
-  "bin": {
-    "genpage": "index.js"
   },
   "files": [
     "index.js",

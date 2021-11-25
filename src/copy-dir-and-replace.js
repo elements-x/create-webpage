@@ -14,17 +14,20 @@ function copyDirAndReplace(fromDir, toDir, replacements = {}) {
  
   console.log(`* Copying directory ${fromDir} to ${toDir} with replacements`);
   walkDir(fromDir, file => {
-    const fileContents = fs.readFileSync(file, 'utf8');
+    const isTextFile = file.match(/\.(html|json|txt|css)$/); 
     const outputPath = path.join(toDir, file.replace(fromDir, ''));
-    let outputContents = fileContents;
-    if (file.match(/\.(html|json|txt|css)$/)) {
+    if (isTextFile) {
       try {
-        outputContents = mustache.render(fileContents, replacements);
+        const fileContents = fs.readFileSync(file, 'utf8');
+        const fileReplacedContents = mustache.render(fileContents, replacements);
+        fs.outputFileSync(outputPath, fileReplacedContents);
       } catch (e) {
-        // console.error(e);
+        console.error(e);
       }
+    } else {
+      const fileContents = fs.readFileSync(file);
+      fs.outputFileSync(outputPath, fileContents);
     }
-    fs.outputFileSync(outputPath, outputContents);
   });
 }
 

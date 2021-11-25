@@ -8,63 +8,61 @@
     <meta name="description" content="VanillarJS Single Page Web Application Template Generator" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/78aab7465c.js" crossorigin="anonymous"></script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Erica+One&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="style.css" />
-  {{#staticAppType}}
-    <script src="https://unpkg.com/elements-x@2.1.9/dist/elements-x.min.js"></script>
-    <script src="assets/chroma.min.js"></script>
-    <script src="assets/animate-x.js" type="module"></script>
-    <script src="script.js"></script>
-  {{/staticAppType}}
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+
+    <!-- Scripts -->
+    <script src="//unpkg.com/elements-x/dist/elements-x.min.js"></script>
+    <script src="//unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="//unpkg.com/chroma-js/chroma.min.js"></script>
+    <script src="script.js" defer></script>
   </head>
   <body>
     <nav class="nav-bar vertical">
-      <div class="nav-item active" data-nav="intro">
-        <div class="text">Intro</div>
-      </div>
-      <div class="nav-item" data-nav="home">
-        <div class="text">Home</div>
-      </div>
-      <div class="nav-item"  data-nav="contact"> 
-        <div class="text">Contact</div>
-      </div>
-      <div class="nav-item"  data-nav="about">
-        <div class="text">About</div>
-      </div>
-      <div class="nav-item"  data-nav="more">
-        <div class="text">More</div>
-      </div>
+      <div class="nav-item" data-nav="intro">   <div class="text">Intro</div>   </div>
+      <div class="nav-item" data-nav="home">    <div class="text">Home</div>    </div>
+      <div class="nav-item" data-nav="about">   <div class="text">About</div>   </div>
+      <div class="nav-item" data-nav="more">    <div class="text">More</div>    </div>
+      <div class="nav-item" data-nav="contact"> <div class="text">Contact</div> </div>
     </nav>
 
-    <div id="intro" class="contents" data-color="#52101b" 
+    <div id="intro" class="contents" data-bg-color="#52101b" 
       style="--bg-image:url(assets/images/bicycle.png);">
       <x-include src="pages/intro.html" style="height: 100vh"></x-include>
     </div>
 
-    <div id="home" class="contents" data-color="#f8cdca"
+    <div id="home" class="contents" data-bg-color="#f8cdca"
       style="--bg-image:url(assets/images/antique-fan.png);">
       <x-include src="pages/readme.html"></x-include>
     </div>
 
-    <div id="contact" class="contents" data-color="#0d6269"
-      style="--bg-image:url(assets/images/compas.png); --bg-left: -10vw; --bg-top:0">
-      <x-include src="pages/contact.html"></x-include>
-    </div>
-
-    <div id="about" class="contents" data-color="#1cccda"
+    <div id="about" class="contents" data-bg-color="#1cccda"
       style="--bg-image:url(assets/images/bamboo.png)">
       <x-include src="pages/about.html"></x-include>
     </div>
 
-    <div id="more" class="contents" data-color="#Fbe2e0"
+    <div id="more" class="contents" data-bg-color="#Fbe2e0"
       style="--bg-image:url(assets/images/hun-min-jeung-eum.png);">
       <x-include src="pages/more.html"></x-include>
     </div>
+
+    <div id="contact" class="contents" data-bg-color="#0d6269"
+      style="--bg-image:url(assets/images/compas.png); --bg-left: -10vw; --bg-top:0">
+      <x-include src="pages/contact.html"></x-include>
+    </div>
+
   </body>
 </html>

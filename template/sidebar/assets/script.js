@@ -23,11 +23,6 @@ window.$ = document.querySelector.bind(document);
 }(window.location))
  
 window.addEventListener('DOMContentLoaded', function() {
-  // enable/disable outline for click and tab
-  document.body.addEventListener('click', 
-  e => document.body.classList.remove('a11y-outline') );
-  document.body.addEventListener('keydown', 
-  e => (e.key === 'Tab') && document.body.classList.add('a11y-outline') );
   $('#dark-mode-switch').addEventListener('click', event => {
     const theme = $('#dark-mode-switch').getAttribute('aria-checked') === 'true' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', theme);
