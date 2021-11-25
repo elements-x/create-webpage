@@ -6,6 +6,9 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.com/"
   },
+  "bin": {
+    "create-webpage": "index.js"
+  },
   "files": [
     "index.js",
     "template",
